@@ -5,7 +5,8 @@ namespace Bebbs.Harmonize.With.Messaging
     {
         public override void Load()
         {
-            Bind<IMapping>().To<Mapping>().InSingletonScope();
+            Bind<Mapping.IHelper>().To<Mapping.Helper>().InSingletonScope();
+            Bind<ISerializer>().To<Serializer>().InSingletonScope();
             Bind<IWrapper>().To<Wrapper>().InSingletonScope();
 
             Bind<IBridge, IInitialize, ICleanup>().To<Bridge>().InSingletonScope();
