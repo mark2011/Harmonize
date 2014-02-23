@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Bebbs.Harmonize.Harmony.Hub
+namespace Bebbs.Harmonize.With.Harmony.Hub
 {
-    public interface IDevice : With.Component.IEntity
+    public interface IEntity : With.Component.IEntity
     {
         int Id { get; }
         string Icon { get; }
@@ -21,12 +19,12 @@ namespace Bebbs.Harmonize.Harmony.Hub
         string HubName { get; set; }
     }
 
-    internal class Device : IDevice
+    internal class Entity : IEntity
     {
         private readonly Lazy<With.Component.IIdentity> _identity;
         private readonly Lazy<With.Component.IEntityDescription> _description;
 
-        public Device()
+        public Entity()
         {
             _identity = new Lazy<With.Component.IIdentity>(() => new Identity(id.ToString()));
             _description = new Lazy<With.Component.IEntityDescription>(() => new EntityDescription(label, type, manufacturer, model, deviceProfileUri));
@@ -49,50 +47,50 @@ namespace Bebbs.Harmonize.Harmony.Hub
 
         IEnumerable<With.Component.IActionable> With.Component.IEntity.Actionables
         {
-            get { return controlGroup.SelectMany(group => group.function); }
+            get { return controlGroup.SelectMany(group => group.function).ToArray(); }
         }
 
-        string IDevice.Icon
+        string IEntity.Icon
         {
             get { return icon; }
         }
 
-        int IDevice.Id
+        int IEntity.Id
         {
             get { return id; }
         }
 
-        bool IDevice.IsManualPower
+        bool IEntity.IsManualPower
         {
             get { return isManualPower; }
         }
 
-        string IDevice.DeviceProfileUri
+        string IEntity.DeviceProfileUri
         {
             get { return deviceProfileUri; }
         }
 
-        string IDevice.DeviceTypeDisplayName
+        string IEntity.DeviceTypeDisplayName
         {
             get { return deviceTypeDisplayName; }
         }
 
-        int IDevice.Transport
+        int IEntity.Transport
         {
             get { return transport; }
         }
 
-        int IDevice.ControlPort
+        int IEntity.ControlPort
         {
             get { return controlPort; }
         }
 
-        string IDevice.SuggestedDisplay
+        string IEntity.SuggestedDisplay
         {
             get { return suggestedDisplay; }
         }
 
-        IEnumerable<IControl> IDevice.Controls 
+        IEnumerable<IControl> IEntity.Controls 
         {
             get { return controlGroup; }
         }
