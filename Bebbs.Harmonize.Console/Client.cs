@@ -24,6 +24,11 @@ namespace Bebbs.Harmonize.Console
                 modules.Add(new With.Harmony.Module());
             }
 
+            if (_options.WithOwl)
+            {
+                modules.Add(new With.Owl.Intuition.Module());
+            }
+
             if (_options.UseAllJoyn)
             {
                 modules.Add(new Harmonize.With.Alljoyn.Module());
@@ -43,7 +48,7 @@ namespace Bebbs.Harmonize.Console
 
             _harmonizer = new Harmonize.Harmonizer(harmonizeOptions);
 
-            await _harmonizer.Start(new Settings.Provider());
+            await _harmonizer.Start();
 
             /* This code powers on the amp once harmonize has started, kept here for reference now but will be moved shortly
             var device = result.Devices.Where(d => string.Equals(d.Type, "Amplifier", StringComparison.CurrentCultureIgnoreCase) && string.Equals(d.Model, "DSP-A5", StringComparison.CurrentCultureIgnoreCase)).First();
