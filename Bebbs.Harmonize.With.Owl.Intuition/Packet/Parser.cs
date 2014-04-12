@@ -1,16 +1,12 @@
 ﻿using Bebbs.Harmonize.With.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Bebbs.Harmonize.With.Owl.Intuition.Packet
 {
     public interface IParser
     {
-        IEnumerable<IPacket> GetPackets(string packets);
+        IEnumerable<IReading> GetReadings(string packets);
     }
 
     internal class Parser : IParser
@@ -35,7 +31,7 @@ namespace Bebbs.Harmonize.With.Owl.Intuition.Packet
             }
         }
 
-        public IEnumerable<IPacket> GetPackets(string packets)
+        public IEnumerable<IReading> GetReadings(string packets)
         {
             Wrapper wrapper = GetWrapper(packets);
 
